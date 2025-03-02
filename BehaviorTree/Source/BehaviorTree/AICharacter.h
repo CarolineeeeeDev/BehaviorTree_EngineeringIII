@@ -19,6 +19,9 @@ class BEHAVIORTREE_API AAICharacter : public ACharacter {
 public:
     AAICharacter();
 
+    UPROPERTY(BlueprintReadWrite)
+    float RobotPower;
+
 protected:
     virtual void BeginPlay() override;
     virtual void Tick(float DeltaTime) override;
@@ -35,6 +38,7 @@ private:
     UPROPERTY()
     TObjectPtr<UBehaviorTreeNode> RootNode;
 
+
 public:
     UFUNCTION()
     void OnSeePawn(APawn* SeenPawn);
@@ -45,14 +49,20 @@ public:
     void Patrol();
     void ChasePlayer();
     void SearchArea();
+    UFUNCTION(BlueprintImplementableEvent)
+    void AttackEvent();
+    UFUNCTION(BlueprintImplementableEvent)
+    void RechargeEvent();
+    UFUNCTION(BlueprintImplementableEvent)
+    void DefendEvent();
     void Attack();
-    void Defend();
+    void LookAround();
     void Recharge();
 
     bool CanSeePlayer();
     bool HeardNoise();
 
-    UPROPERTY()
+    UPROPERTY(BlueprintReadOnly)
     TObjectPtr<APawn> TargetPlayer;
 
     FVector LastNoiseLocation;

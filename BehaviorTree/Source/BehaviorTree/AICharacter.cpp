@@ -8,7 +8,7 @@
 
 AAICharacter::AAICharacter() {
     PrimaryActorTick.bCanEverTick = true;
-
+    RobotPower = 100.0f;
     PawnSensingComponent = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensing"));
     if (PawnSensingComponent) {
         PawnSensingComponent->SightRadius = 500.0f;
@@ -116,18 +116,19 @@ void AAICharacter::SearchArea() {
 
 void AAICharacter::Attack() {
     if (TargetPlayer) {
-        UE_LOG(LogTemp, Warning, TEXT("AI attacking player at location: %s"), *TargetPlayer->GetActorLocation().ToString());
-    }
-    else {
-        UE_LOG(LogTemp, Warning, TEXT("No player to attack!"));
+        UE_LOG(LogTemp, Warning, TEXT("AI is attacking!"));
+
+        AttackEvent();
     }
 }
 
-void AAICharacter::Defend() {
-    UE_LOG(LogTemp, Warning, TEXT("AI is defending! (Invincible)"));
+void AAICharacter::LookAround() {
+    UE_LOG(LogTemp, Warning, TEXT("AI is defending!"));
+    DefendEvent();
 }
 
 void AAICharacter::Recharge() {
+    if (RobotPower < 100.0f) RechargeEvent();
     UE_LOG(LogTemp, Warning, TEXT("AI is recharging energy"));
 }
 
