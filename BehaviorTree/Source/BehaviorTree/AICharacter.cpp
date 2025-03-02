@@ -12,6 +12,7 @@ AAICharacter::AAICharacter() {
     PawnSensingComponent = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensing"));
     if (PawnSensingComponent) {
         PawnSensingComponent->SightRadius = 500.0f;
+        PawnSensingComponent->HearingThreshold = 900.0f;
         PawnSensingComponent->OnSeePawn.AddDynamic(this, &AAICharacter::OnSeePawn);
         PawnSensingComponent->OnHearNoise.AddDynamic(this, &AAICharacter::OnHearNoise);
     }
