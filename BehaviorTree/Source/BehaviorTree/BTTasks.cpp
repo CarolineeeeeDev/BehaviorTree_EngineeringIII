@@ -28,7 +28,7 @@ bool UAttackTask::Execute(AAICharacter* AI) {
 
 bool UDefendTask::Execute(AAICharacter* AI) {
     if (!AI) return false;
-    AI->Defend();
+    AI->LookAround();
     return true;
 }
 
